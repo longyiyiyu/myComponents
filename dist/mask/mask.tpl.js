@@ -1,0 +1,1 @@
+define("mask/mask.tpl",function(require,exports,module){return function(it,opt){with(it=it||{}){var _$out_=[];return _$out_.push('<div class="mask"></div>'),_$out_.join("")}}});
