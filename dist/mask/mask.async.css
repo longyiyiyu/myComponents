@@ -1,1 +1,10 @@
-define('mask/mask.async.scss', function(require, exports, module){function importStyle(css, id) {    var ele = document.createElement('style');    ele.id = id;    document.getElementsByTagName('head')[0].appendChild(ele);    if (ele.styleSheet) {        ele.styleSheet.cssText = css;    } else {        ele.appendChild(document.createTextNode(css));    }}; importStyle(".mask{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:20000}", "mask/mask.async.scss"); }); require("mask/mask.async.scss")
+define('mask/mask.async.scss', function(require, exports, module){function importStyle(css, id) {
+    var ele = document.createElement('style');
+    ele.id = id;
+    document.getElementsByTagName('head')[0].appendChild(ele);
+    if (ele.styleSheet) {
+        ele.styleSheet.cssText = css;
+    } else {
+        ele.appendChild(document.createTextNode(css));
+    }
+}; importStyle(".mask {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: rgba(0, 0, 0, 0.4);\r\n  z-index: 20000; }\r\n", "mask/mask.async.scss"); }); require("mask/mask.async.scss")

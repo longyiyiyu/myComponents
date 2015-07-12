@@ -1,1 +1,274 @@
-var require,define;!function(e){function r(e,t,a){if(!(e in s)){s[e]=!0;var c=document.createElement("script"),u=+new Date;return c.onload=function(){var r=+new Date-u;a&&a.noReport||(setTimeout(function(){window.MMReport&&MMReport.report("mobilev2 script load:"+(a&&a.reportPath?a.reportPath:e),0,r)},3e3),(a||(a={}))&&(a.onloadReportInfo={url:a&&a.reportPath?a.reportPath:e,ec:0,duration:r}),-1!=e.search(o)&&-1!=e.search(".js")&&setTimeout(function(){badjs("script load redirect success:"+e,window.location.href,0,526122,2)},3e3))},c.onerror=function(){var i=+new Date-u;t&&t(),-1!=e.indexOf(n)&&r(e.replace(n,o),t,a),a&&a.noReport||(-1==e.search(o)?(setTimeout(function(){window.MMReport&&MMReport.report("mobilev2 script load:"+(a&&a.reportPath?a.reportPath:e),1,i),badjs("script load error:"+e,window.location.href,0,507884,4)},3e3),(a||(a={}))&&(a.onloadReportInfo={url:a&&a.reportPath?a.reportPath:e,ec:1,duration:i})):setTimeout(function(){badjs("script load redirect error:"+e,window.location.href,0,526123,4)},3e3))},c.type="text/javascript",c.src=e,i.appendChild(c),c}}function t(e,t,n){var o=a[e]||(a[e]=[]);o.push(t);var i,c=p[e]||{},u=c.pkg;i=u?f[u].url:c.url||e,l[e]&&(i=l[e]),r(i,n&&function(){n(e)})}var n,o,i=document.getElementsByTagName("head")[0],a={},c={},u={},s={},p={},f={},l={};define=function(e,r,t){void 0===t&&(t=r),c[e]=t;var n=a[e];if(n){for(var o=0,i=n.length;i>o;o++)n[o]();delete a[e]}},require=function(e){e=require.alias(e);var r=u[e];if(r)return r.exports;var t=c[e];if(!t)throw"[ModJS] Cannot find module `"+e+"`";r=u[e]={exports:{}};var n="function"==typeof t?t.apply(r,[require,r.exports,r]):t;return n&&(r.exports=n),r.exports},require.async=function(r,n,o){function i(e){for(var r=0,n=e.length;n>r;r++){var u=e[r];if(!(u in c||u in f)){f[u]=!0,l++,t(u,a,o);var s=p[u];s&&"deps"in s&&i(s.deps)}}}function a(){if(0==l--){for(var t=[],o=0,i=r.length;i>o;o++)t[o]=require(r[o]);n&&n.apply(e,t)}}"string"==typeof r&&(r=[r]);for(var u=0,s=r.length;s>u;u++)r[u]=require.alias(r[u]);var f={},l=0;i(r),a()},require.resourceMap=function(e){var r,t;t=e.res;for(r in t)t.hasOwnProperty(r)&&(p[r]=t[r]);t=e.pkg;for(r in t)t.hasOwnProperty(r)&&(f[r]=t[r])},require.loadJs=function(e){r(e)},require.loadCss=function(e){if(e.content){var r=document.createElement("style");r.type="text/css",r.styleSheet?r.styleSheet.cssText=e.content:r.innerHTML=e.content,i.appendChild(r)}else if(e.url){var t=document.createElement("link");t.href=e.url,t.rel="stylesheet",t.type="text/css",i.appendChild(t)}},require.alias=function(e){return e},require.timeout=5e3,require.config=function(e){n=e.cdnPath||n,o=e.htdocsPath||o,l=e.aliasMap||l},require.getData=function(e,t,n,o){var i="defineData"+Math.floor(1e4*Math.random());e+=(-1!=e.indexOf("?")?"&":"?")+"callback="+i+"&_t="+(new Date).getTime(),window[i]=function(e){setTimeout(function(){t(e,o)})},r(e,n,o)}}(this);
+/**
+ * file: mod.js
+ * ver: 1.0.7
+ * update: 2014/4/14
+ *
+ * https://github.com/zjcqoo/mod
+ */
+var require, define;
+
+(function (global) {
+    var head = document.getElementsByTagName('head')[0],
+        loadingMap = {},
+        factoryMap = {},
+        modulesMap = {},
+        scriptsMap = {},
+        resMap = {},
+        pkgMap = {},
+        aliasMap = {},
+        cdnPath, htdocsPath;
+
+    function createScript(url, onerror, options) {
+        if (url in scriptsMap) return;
+        scriptsMap[url] = true;
+
+        var script = document.createElement('script'),
+            start = +new Date();
+
+//        script.onload = function () {
+//            var duration = +new Date() - start;
+//            if(options && options.noReport){
+//                return;
+//            }
+//            setTimeout(function () {
+//                window.MMReport && MMReport.report('mobilev2 script load:' + ((options && options.reportPath)?options.reportPath:url), 0, duration);
+//            }, 3000);
+//            (options || (options = {})) && (options.onloadReportInfo = {
+//                url: (options && options.reportPath)?options.reportPath:url,
+//                ec: 0,
+//                duration: duration
+//            });
+//            if(url.search(htdocsPath) != -1 && url.search('.js')!=-1){
+//                setTimeout(function () {
+//                    badjs('script load redirect success:' + url, window.location.href, 0, 526122, 2);
+//                }, 3000);
+//            }
+//        };
+//        script.onerror = function () {
+//            var duration = +new Date() - start;
+//	        onerror && onerror();
+//
+//            if(url.indexOf(cdnPath)!=-1){
+//                createScript(url.replace(cdnPath, htdocsPath), onerror, options);
+//            }
+//
+//            if(options && options.noReport){
+//                return;
+//            }
+//            if(url.search(htdocsPath) == -1) {
+//                setTimeout(function () {
+//                    window.MMReport && MMReport.report('mobilev2 script load:' + ((options && options.reportPath) ? options.reportPath : url), 1, duration);
+//                    badjs('script load error:' + url, window.location.href, 0, 507884, 4);
+//                }, 3000);
+//                (options || (options = {})) && (options.onloadReportInfo = {
+//                    url: (options && options.reportPath)?options.reportPath:url,
+//                    ec: 1,
+//                    duration: duration
+//                });
+//            }else {
+//                setTimeout(function () {
+//                    badjs('script load redirect error:' + url, window.location.href, 0, 526123, 4);
+//                }, 3000);
+//            }
+//        };
+
+        script.type = 'text/javascript';
+        script.src = url;
+        head.appendChild(script);
+        return script;
+    }
+
+    function loadScript(id, callback, onerror) {
+        var queue = loadingMap[id] || (loadingMap[id] = []);
+        queue.push(callback);
+
+        //
+        // resource map query
+        //
+        var res = resMap[id] || {};
+        var pkg = res.pkg;
+        var url;
+
+        if (pkg) {
+            url = pkgMap[pkg].url;
+        } else {
+            url = res.url || id;
+        }
+
+        if (aliasMap[id]) {
+            url = aliasMap[id];
+        }
+
+        createScript(url, onerror && function () {
+            onerror(id);
+        });
+    }
+
+    define = function (id, deps, factory) {
+        //console.log('define:', id);
+        if (factory === undefined) {
+            factory = deps;
+        }
+        factoryMap[id] = factory;
+
+        var queue = loadingMap[id];
+        if (queue) {
+            for (var i = 0, n = queue.length; i < n; i++) {
+                queue[i]();
+            }
+            delete loadingMap[id];
+        }
+    };
+
+    require = function (id) {
+        id = require.alias(id);
+
+        var mod = modulesMap[id];
+        if (mod) {
+            return mod.exports;
+        }
+
+        //
+        // init module
+        //
+        var factory = factoryMap[id];
+        if (!factory) {
+            throw '[ModJS] Cannot find module `' + id + '`';
+        }
+
+        mod = modulesMap[id] = {
+            exports: {}
+        };
+
+        //
+        // factory: function OR value
+        //
+        var ret = (typeof factory == 'function')
+            ? factory.apply(mod, [require, mod.exports, mod])
+            : factory;
+
+        if (ret) {
+            mod.exports = ret;
+        }
+        return mod.exports;
+    };
+
+    require.async = function (names, onload, onerror) {
+        if (typeof names == 'string') {
+            names = [names];
+        }
+
+        for (var i = 0, n = names.length; i < n; i++) {
+            names[i] = require.alias(names[i]);
+        }
+
+        var needMap = {};
+        var needNum = 0;
+
+        function findNeed(depArr) {
+            for (var i = 0, n = depArr.length; i < n; i++) {
+                //
+                // skip loading or loaded
+                //
+                var dep = depArr[i];
+                if (dep in factoryMap || dep in needMap) {
+                    continue;
+                }
+
+                needMap[dep] = true;
+                needNum++;
+                loadScript(dep, updateNeed, onerror);
+
+                var child = resMap[dep];
+                if (child && 'deps' in child) {
+                    findNeed(child.deps);
+                }
+            }
+        }
+
+        function updateNeed() {
+            if (0 == needNum--) {
+                var args = [];
+                for (var i = 0, n = names.length; i < n; i++) {
+                    args[i] = require(names[i]);
+                }
+
+                onload && onload.apply(global, args);
+            }
+        }
+
+        findNeed(names);
+        updateNeed();
+    };
+
+    require.resourceMap = function (obj) {
+        var k, col;
+
+        // merge `res` & `pkg` fields
+        col = obj.res;
+        for (k in col) {
+            if (col.hasOwnProperty(k)) {
+                resMap[k] = col[k];
+            }
+        }
+
+        col = obj.pkg;
+        for (k in col) {
+            if (col.hasOwnProperty(k)) {
+                pkgMap[k] = col[k];
+            }
+        }
+    };
+
+    require.loadJs = function (url) {
+        createScript(url);
+    };
+
+    require.loadCss = function (cfg) {
+        if (cfg.content) {
+            var sty = document.createElement('style');
+            sty.type = 'text/css';
+
+            if (sty.styleSheet) {       // IE
+                sty.styleSheet.cssText = cfg.content;
+            } else {
+                sty.innerHTML = cfg.content;
+            }
+            head.appendChild(sty);
+        }
+        else if (cfg.url) {
+            var link = document.createElement('link');
+            link.href = cfg.url;
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            head.appendChild(link);
+        }
+    };
+
+
+    require.alias = function (id) {
+        return id;
+    }; // {return aliasMap[id] || id};
+
+    require.timeout = 5000;
+
+    require.config = function (opts) {
+        cdnPath = opts.cdnPath || cdnPath;
+        htdocsPath = opts.htdocsPath || htdocsPath;
+        aliasMap = opts.aliasMap || aliasMap;
+    };
+
+//    var iiii = 0;
+    require.getData = function(url, cb, onerror, options){
+        var cbName = 'defineData'+Math.floor(Math.random()*10000);
+//        var cbName = 'defineData222';
+        url += (url.indexOf('?')!=-1?'&':'?')+'callback='+cbName+'&_t='+(new Date().getTime());
+        window[cbName] = function(data){
+            setTimeout(function() {
+                cb(data, options);
+            });
+        };
+        createScript(url, onerror, options);
+    };
+
+})(this);
