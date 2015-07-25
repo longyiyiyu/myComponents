@@ -1,39 +1,39 @@
 {
     "res": {
+        "common/common.css": {
+            "uri": "/common/common.css",
+            "type": "css"
+        },
         "common/reset.css": {
             "uri": "/common/reset.css",
             "type": "css"
         },
-        "lib/mod.config": {
-            "uri": "/lib/mod.config.js",
-            "type": "js"
+        "mask": {
+            "uri": "/components/mask/mask.js",
+            "type": "js",
+            "deps": [
+                "zepto",
+                "mask/mask.tpl",
+                "mask/mask.scss"
+            ]
+        },
+        "mask/mask.scss": {
+            "uri": "/components/mask/mask.css",
+            "type": "css"
+        },
+        "mask/mask.tpl": {
+            "uri": "/components/mask/mask.tpl.js",
+            "type": "js",
+            "deps": [
+                "mask/mask.scss"
+            ]
         },
         "lib/mod.js": {
             "uri": "/lib/mod.js",
             "type": "js"
         },
-        "lib/zepto": {
+        "zepto": {
             "uri": "/lib/zepto.js",
-            "type": "js"
-        },
-        "mask/mask.async.scss": {
-            "uri": "/mask/mask.async.css",
-            "type": "css",
-            "extras": {
-                "wrapcss": true
-            }
-        },
-        "mask": {
-            "uri": "/mask/mask.js",
-            "type": "js",
-            "deps": [
-                "zepto",
-                "mask/mask.tpl",
-                "mask/mask.async.scss"
-            ]
-        },
-        "mask/mask.tpl": {
-            "uri": "/mask/mask.tpl.js",
             "type": "js"
         }
     },

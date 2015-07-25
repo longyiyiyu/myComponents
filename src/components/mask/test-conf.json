@@ -1,0 +1,5 @@
+{
+    "html": "<div class=\"mask-box\">这是内容box</div><a id=\"test-btn\" href=\"javascript:void(0)\">call a mask</a>",
+    "css": ".mask-box { position: relative; width: 100px; height: 100px; -webkit-transform: translate3d(0,0,0);}",
+    "js": "var $ = require('zepto'), btn = $('#test-btn'), mask = require('mask').init({ box: $('.mask-box'), onClick: function() { alert('you has clicked mask!') } }); btn.on('click', function() { mask.show(); });"
+}
